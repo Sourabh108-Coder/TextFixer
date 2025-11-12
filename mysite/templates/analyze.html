@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Checking </title>
+
+    <style>
+
+       .nav-bar {
+            background-color: rgb(38, 34, 34);
+            display: flex;
+            justify-content: center;
+           
+        }
+
+        .txt{
+          color:white;
+        }
+
+        .box-left {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .answer{
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+            margin:2rem;
+        }
+
+        h1{
+            color: red;
+            font-style: underline;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        pre{
+            font-size: 20px;
+            font-family: cursive;
+        }
+
+        .copy-box {
+           background: #f8f9fa;
+           padding: 15px;
+           border-radius: 8px;
+           font-family: monospace;
+           border: 1px solid #ddd;
+           position: relative;
+           max-width: 80vw;
+           margin: auto;
+           margin-top: 2rem;
+           height: 10rem;
+           font-size: 20px;
+           border: 2px solid black;
+       }
+
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #5a67d8;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      width: 5rem;
+      height:2rem;
+      font-size: 16px;
+    }
+
+    .copy-btn:hover {
+      background-color: #434190;
+    }
+
+     .toast {
+      position: fixed;
+      top: 50vh;
+      right: 40vw;
+      background:#48bb78;
+      color: black;
+      padding: 10px 20px;
+      border-radius: 5px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+    }
+
+    .back
+    {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-left: 130px;
+      background-color: #5a67d8;
+      border-radius: 6px;
+
+    }
+
+    @media (max-width: 1024px) {
+
+       .nav-bar h1 {
+          font-size: 28px;
+      }
+
+
+       .copy-box {
+         max-width: 90vw;
+         max-height: 8rem;
+         font-size: 18px;
+         padding: 12px;
+     }
+
+       .txt{
+         color: white;
+     }
+
+       .copy-btn {
+         top: 8px;
+         right: 8px;
+         width: 4.5rem;
+         height: 2rem;
+         font-size: 14px;
+     }
+
+       h1 {
+         font-size: 32px;
+         margin-top: 1.5rem;
+     }
+
+       .back {
+         margin-left: 0;
+         display: block;
+         margin: 20px auto;
+         width: 10rem;
+         font-size: 16px;
+     }
+
+       .toast {
+         right: 35vw;
+         top: 70vh;
+         padding: 8px 16px;
+         font-size: 18px;
+         width:90vw;
+         height:2rem;
+     }
+}
+
+
+@media (max-width: 768px) {
+
+   .nav-bar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  h1 {
+    font-size: 28px;
+    text-align: center;
+  }
+
+  .copy-box {
+    width: 90%;
+    max-width: 90%;
+    height: 8rem;
+    font-size: 16px;
+    margin-top: 1.5rem;
+    padding: 10px;
+  }
+
+  .copy-btn {
+    top: 8px;
+    right: 8px;
+    font-size: 14px;
+    width: 4rem;
+    height: 1.8rem;
+  }
+
+  .anan
+  {
+    margin-top: 3rem;
+  }
+
+  pre {
+    font-size: 16px;
+  }
+
+  .back {
+    margin: 1.5rem auto;
+    display: block;
+    width: 80%;
+    padding: 0.8rem;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    right: 50%;
+    transform: translateX(50%);
+    font-size: 18px;
+    width: 90vw;
+    padding: 8px 14px;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .anan {
+    font-size: 26px;
+  }
+
+  .copy-box {
+    font-size: 15px;
+    padding: 8px;
+  }
+
+  .copy-btn {
+    width: 3.8rem;
+    height: 1.6rem;
+    font-size: 13px;
+  }
+
+  .back {
+    width: 90%;
+    padding: 0.8rem;
+    font-size: 15px;
+  }
+
+  .toast {
+    bottom: 15px;
+    right: 50%;
+    transform: translateX(50%);
+    font-size: 17.5px;
+    padding: 6px 12px;
+  }
+
+}
+ 
+    </style>
+</head>
+<body>
+
+   <nav class="nav-bar">
+            <div class="box-left">
+                <h1 class="txt">TextUtils.in</h1>
+            </div>
+
+        </nav>
+
+     <h1 class="anan">Analyzed Text Result</h1>
+
+  <div class="copy-box" id="textBox">
+    {{ analyzed_text }}
+    <button class="copy-btn" onclick="copyText()">Copy</button>
+  </div>
+
+  <button onclick="window.location.href='/'" class="back">Go Back</button>
+
+  <div id="toast" class="toast">Text Copied to Clipboard Successfully!!</div>
+
+
+  <script>
+    function copyText() {
+      
+      const text = document.getElementById("textBox").childNodes[0].textContent.trim();
+    
+      navigator.clipboard.writeText(text).then(() => {
+        
+        const toast = document.getElementById("toast");
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 5000);
+      });
+    }
+  </script>
+</body>
+</html>
