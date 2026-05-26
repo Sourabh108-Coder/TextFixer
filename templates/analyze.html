@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Analyzed Result | TextUtils.in</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            background:
+            radial-gradient(circle at top left,#7f5af0 0%,transparent 30%),
+            radial-gradient(circle at bottom right,#2cb67d 0%,transparent 30%),
+            linear-gradient(135deg,#16161a,#242629);
+            color:white;
+            overflow-x:hidden;
+        }
+
+        /* NAVBAR */
+
+        .nav-bar{
+            width:100%;
+            height:70px;
+            padding:0 2rem;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            backdrop-filter:blur(15px);
+            background:rgba(255,255,255,0.05);
+            border-bottom:1px solid rgba(255,255,255,0.08);
+        }
+
+        .logo{
+            display:flex;
+            align-items:center;
+            gap:0.7rem;
+        }
+
+        .logo-icon{
+            width:40px;
+            height:40px;
+            border-radius:12px;
+            background:linear-gradient(135deg,#7f5af0,#2cb67d);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:18px;
+            font-weight:bold;
+            color:white;
+        }
+
+        .logo h1{
+            font-size:1.4rem;
+            font-weight:600;
+        }
+
+        /* MAIN */
+
+        .container{
+            min-height:calc(100vh - 70px);
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:2rem 1rem;
+        }
+
+        .card{
+            width:100%;
+            max-width:900px;
+            background:rgba(255,255,255,0.08);
+            border:1px solid rgba(255,255,255,0.1);
+            backdrop-filter:blur(20px);
+            border-radius:24px;
+            padding:2rem;
+            box-shadow:0 10px 40px rgba(0,0,0,0.35);
+        }
+
+        /* HEADER */
+
+        .hero{
+            text-align:center;
+            margin-bottom:2rem;
+        }
+
+        .hero h2{
+            font-size:2.2rem;
+            margin-bottom:0.6rem;
+            background:linear-gradient(90deg,#ffffff,#7f5af0,#2cb67d);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+        }
+
+        .hero p{
+            color:#b8b8c0;
+            font-size:0.95rem;
+            line-height:1.6;
+        }
+
+        /* RESULT BOX */
+
+        .result-box{
+            position:relative;
+            width:100%;
+            min-height:250px;
+            background:rgba(255,255,255,0.06);
+            border:1px solid rgba(255,255,255,0.08);
+            border-radius:20px;
+            padding:1.5rem;
+            overflow:auto;
+            transition:0.3s;
+        }
+
+        .result-box:hover{
+            border-color:#7f5af0;
+            box-shadow:0 0 20px rgba(127,90,240,0.2);
+        }
+
+        .result-text{
+            color:#f1f1f1;
+            font-size:16px;
+            line-height:1.8;
+            white-space:pre-wrap;
+            word-wrap:break-word;
+            padding-right:4rem;
+        }
+
+        /* COPY BUTTON */
+
+        .copy-btn{
+            position:absolute;
+            top:15px;
+            right:15px;
+            border:none;
+            background:linear-gradient(135deg,#7f5af0,#2cb67d);
+            color:white;
+            padding:0.7rem 1rem;
+            border-radius:12px;
+            cursor:pointer;
+            font-weight:600;
+            transition:0.3s;
+        }
+
+        .copy-btn:hover{
+            transform:translateY(-2px);
+            box-shadow:0 8px 18px rgba(127,90,240,0.4);
+        }
+
+        /* BUTTONS */
+
+        .actions{
+            display:flex;
+            justify-content:center;
+            gap:1rem;
+            margin-top:2rem;
+            flex-wrap:wrap;
+        }
+
+        .btn{
+            border:none;
+            padding:0.9rem 2rem;
+            border-radius:50px;
+            font-size:15px;
+            font-weight:600;
+            cursor:pointer;
+            transition:0.3s;
+            text-decoration:none;
+        }
+
+        .primary-btn{
+            background:linear-gradient(135deg,#7f5af0,#2cb67d);
+            color:white;
+        }
+
+        .secondary-btn{
+            background:rgba(255,255,255,0.08);
+            color:white;
+            border:1px solid rgba(255,255,255,0.08);
+        }
+
+        .btn:hover{
+            transform:translateY(-2px);
+        }
+
+        /* TOAST */
+
+        .toast{
+            position:fixed;
+            top:20px;
+            right:20px;
+            background:linear-gradient(135deg,#11998e,#38ef7d);
+            color:white;
+            padding:1rem 1.3rem;
+            border-radius:14px;
+            box-shadow:0 8px 20px rgba(0,0,0,0.3);
+            opacity:0;
+            pointer-events:none;
+            transform:translateX(120%);
+            transition:0.4s ease;
+            z-index:999;
+        }
+
+        .toast.show{
+            opacity:1;
+            transform:translateX(0);
+        }
+
+        /* MOBILE */
+
+        @media(max-width:768px){
+
+            .nav-bar{
+                padding:0 1rem;
+            }
+
+            .logo h1{
+                font-size:1.2rem;
+            }
+
+            .container{
+                padding:1rem;
+            }
+
+            .card{
+                padding:1.3rem;
+            }
+
+            .hero h2{
+                font-size:1.7rem;
+            }
+
+            .hero p{
+                font-size:0.85rem;
+            }
+
+            .result-box{
+                min-height:220px;
+                padding:1rem;
+            }
+
+            .result-text{
+                font-size:15px;
+                padding-right:0;
+                margin-top:3rem;
+            }
+
+            .copy-btn{
+                width:100px;
+                font-size:14px;
+                padding:0.6rem 0.8rem;
+            }
+
+            .actions{
+                flex-direction:column;
+            }
+
+            .btn{
+                width:100%;
+                text-align:center;
+            }
+
+            .toast{
+                right:10px;
+                left:10px;
+                top:15px;
+                text-align:center;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="nav-bar">
+
+        <div class="logo">
+            <div class="logo-icon">T</div>
+            <h1>TextUtils.in</h1>
+        </div>
+
+    </nav>
+
+    <!-- MAIN -->
+
+    <div class="container">
+
+        <div class="card">
+
+            <!-- HEADER -->
+
+            <div class="hero">
+                <h2>Your Text is Ready ✨</h2>
+
+                <p>
+                    Here's your beautifully analyzed and transformed text.
+                </p>
+            </div>
+
+            <!-- RESULT BOX -->
+
+            <div class="result-box" id="textBox">
+
+                <button class="copy-btn" onclick="copyText()">
+                    Copy
+                </button>
+
+                <div class="result-text" id="resultText">
+                    {{ analyzed_text }}
+                </div>
+
+            </div>
+
+            <!-- ACTION BUTTONS -->
+
+            <div class="actions">
+
+                <button
+                    class="btn primary-btn"
+                    onclick="window.location.href='/'"
+                >
+                    Analyze Another Text
+                </button>
+
+                <!-- <button
+                    class="btn secondary-btn"
+                    onclick="copyText()"
+                >
+                    Copy Result
+                </button> -->
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- TOAST -->
+
+    <div id="toast" class="toast">
+        ✅ Text copied successfully!
+    </div>
+
+    <script>
+
+        function copyText() {
+
+            const text =
+                document.getElementById("resultText").innerText;
+
+            navigator.clipboard.writeText(text).then(() => {
+
+                const toast =
+                    document.getElementById("toast");
+
+                toast.classList.add("show");
+
+                setTimeout(() => {
+                    toast.classList.remove("show");
+                }, 3000);
+
+            });
+
+        }
+
+    </script>
+
+</body>
+</html>
