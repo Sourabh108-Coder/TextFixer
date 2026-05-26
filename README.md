@@ -41,7 +41,8 @@ mysite/
 │
 ├── mysite/
 │ ├── views.py
-│ ├── pycache/
+  ├── urls.py
+│ ├── settings.py
 │
 ├── templates/
 │ ├── index.html
@@ -84,7 +85,14 @@ http://127.0.0.1:8000/
 4. Copy result easily
 
 ## Screenshots
+### 🏠 Home Page (1)
+![Home Page (1)](screenshots/home_one.png)
 
+### 🏠 Home Page (2)
+![Home Page (2)](screenshots/home_two.png)
+
+### 📄 Result Page
+![Result Page](screenshots/result.png)
 
 
 ## 👨‍💻 Author
