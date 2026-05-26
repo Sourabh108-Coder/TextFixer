@@ -1,401 +1,449 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Template is working</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>TextUtils.in</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        .nav-bar {
-            background-color: rgb(38, 34, 34);
-            display: flex;
-            justify-content: center;
-           
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
         }
 
-        .box-left {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
+        body{
+            min-height:100vh;
+            background:
+            radial-gradient(circle at top left,#7f5af0 0%,transparent 30%),
+            radial-gradient(circle at bottom right,#2cb67d 0%,transparent 30%),
+            linear-gradient(135deg,#16161a,#242629);
+            color:white;
+            overflow:hidden;
         }
 
-        #li1 {
-            display: flex;
-            color: white;
-            list-style-type: none;
-            gap: 1rem;
-            padding-top: 0.1rem;
+        /* NAVBAR */
+
+        .nav-bar{
+            width:100%;
+            height:70px;
+            padding:0 2rem;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            backdrop-filter:blur(15px);
+            background:rgba(255,255,255,0.05);
+            border-bottom:1px solid rgba(255,255,255,0.08);
         }
 
-        h2 {
-            color: white;
-            padding-left: 1rem;
+        .logo{
+            display:flex;
+            align-items:center;
+            gap:0.7rem;
         }
 
-        .box-right {
-            padding: 1.5rem;
-           
+        .logo-icon{
+            width:40px;
+            height:40px;
+            border-radius:12px;
+            background:linear-gradient(135deg,#7f5af0,#2cb67d);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:18px;
+            font-weight:bold;
         }
 
-        .final {
-            margin-top: 3rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap:0.5rem;
-            
+        .logo h1{
+            font-size:1.4rem;
+            font-weight:600;
         }
 
-        .butaddinp {
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            left: 16rem;
-            margin: 2rem;
-            gap: 1rem;
-             
-        }
+        /* MAIN */
 
-        .inp
-        {
-            display: grid;
-            grid-template-columns: repeat(2,1fr);
-            
-        }
-
-        .for-item
-        {
-            max-width:100vw;
-            overflow-x: hidden;
-        }
-
-        .text
-        {
-            font-size: 20px;
-            border: 2px solid black;
-            border-radius: 6px;
-            resize: none       ;
-        }
-
-        .hel
-        {
-             color: red;
-             font-size: 30px;
-        }
-
-        .inp-lab
-        {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            width:max-content
-        }
-
-        #but1
-        {
-            width:10rem;
+        .container{
+            height:calc(100vh - 70px);
+            display:flex;
+            justify-content:center;
+            align-items:center;
             padding:1rem;
-            background-color: #5a67d8;
-            color: white;
-            border-radius: 6px;
-            font-size: 20px;
-            cursor: pointer;
         }
 
-        .but
-        {
-             display: flex;
-            justify-content: center;
-            margin-bottom: 2rem;
+        .card{
+            width:100%;
+            max-width:950px;
+            background:rgba(255,255,255,0.08);
+            border:1px solid rgba(255,255,255,0.1);
+            backdrop-filter:blur(20px);
+            border-radius:24px;
+            padding:1.5rem 2rem;
+            box-shadow:0 10px 40px rgba(0,0,0,0.35);
         }
 
-        .radio {
-         appearance: none;
-         -webkit-appearance: none;
-         -moz-appearance: none;
-         position: relative;
-         width: 22px;
-         height: 22px;
-         border: 2px solid #aaa;
-         border-radius: 50%;
-         outline: none;
-         cursor: pointer;
-         transition: all 0.25s ease-in-out;
-         vertical-align: middle;
-     }
+        /* HERO */
 
-       .radio:hover {
-          border-color: #5a67d8;
-          box-shadow: 0 0 5px #5a67d8aa;
-    }
+        .hero{
+            text-align:center;
+            margin-bottom:1.2rem;
+        }
 
-       .radio:checked {
-          border-color: #5a67d8;
-          background: radial-gradient(circle at center, #5a67d8 45%, transparent 50%);
-          box-shadow: 0 0 5px #5a67d8aa;
-    }
+        .hero h2{
+            font-size:2rem;
+            margin-bottom:0.5rem;
+            background:linear-gradient(90deg,#ffffff,#7f5af0,#2cb67d);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+        }
 
-       .lab {
-          font-family: "Poppins", sans-serif;
-          font-size: 16px;
-          color: #333;
-          cursor: pointer;
-          margin-right: 20px;
-          user-select: none;
-    }
+        .hero p{
+            color:#b8b8c0;
+            font-size:0.95rem;
+            line-height:1.6;
+        }
 
-       .toast-container {
-          position: fixed;
-          bottom: 20px;
-          right: 20px;
-          z-index: 1080;
-    }
+        /* TEXTAREA */
 
-       .custom-toast {
-          position: relative;
-          min-width: 260px;
-          padding: 12px 40px 12px 16px;
-          border-radius: 6px;
-          color: #fff;
-          font-family: "Poppins", sans-serif;
-          margin-top: 10px;
-          box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-          opacity: 1;
-          transition: opacity 0.5s ease, transform 0.3s ease;
-    }
+        .text{
+            width:100%;
+            height:180px;
+            border:none;
+            outline:none;
+            border-radius:18px;
+            padding:1rem;
+            font-size:15px;
+            resize:none;
+            background:rgba(255,255,255,0.07);
+            color:white;
+            border:1px solid rgba(255,255,255,0.08);
+            transition:0.3s;
+        }
 
-       .custom-toast.hide {
-          opacity: 0;
-          transform: translateY(20px);
-    }
+        .text::placeholder{
+            color:#aaa;
+        }
 
-       .toast-body {
-          font-size: 20px;
-          line-height: 1.4;
-    }
+        .text:focus{
+            border-color:#7f5af0;
+            box-shadow:0 0 18px rgba(127,90,240,0.3);
+        }
 
-       .close-btn {
-          position: absolute;
-          top: 5px;
-          right: 10px;
-          background: none;
-          border: none;
-          color: #fff;
-          font-size: 40px;
-          cursor: pointer;
-          line-height: 1;
-          opacity: 0.8;
-          color: black;
-    }
-       .close-btn:hover {
-          opacity: 1;
-    }
+        /* OPTIONS */
 
-       .success {
-          background: linear-gradient(135deg, #38a169, #48bb78);
-          color: black;
-    }
-       .warning {
-          background: linear-gradient(135deg, #e53e3e, #f56565);
-          color: black;
-    }
-       .error {
-          background: linear-gradient(135deg, #e53e3e, #f56565);
-          color: black;
-    }
-       .info {
-          background: linear-gradient(135deg, #3182ce, #63b3ed);
-          color:black
-    }
+        .options{
+            margin-top:1rem;
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:0.8rem;
+        }
 
-@media (max-width: 1024px) {
+        .option-card{
+            background:rgba(255,255,255,0.05);
+            padding:0.8rem 1rem;
+            border-radius:14px;
+            transition:0.3s;
+            border:1px solid rgba(255,255,255,0.06);
+        }
 
-  .butaddinp {
-    left: 0;
-    margin: 1.5rem 0.5rem;
-  }
+        .option-card:hover{
+            background:rgba(255,255,255,0.09);
+        }
 
-  .text {
-    max-width: 100%;
-    max-height: 120px;
-    font-size: 18px;
-  }
+        .inp-lab{
+            display:flex;
+            align-items:center;
+            gap:0.8rem;
+        }
 
-  .inp {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
+        /* RADIO */
 
-  .nav-bar h1 {
-    font-size: 28px;
-  }
+        .radio{
+            appearance:none;
+            width:20px;
+            height:20px;
+            border-radius:50%;
+            border:2px solid #7f5af0;
+            cursor:pointer;
+            position:relative;
+        }
 
-  #but1 {
-    width: 8rem;
-    font-size: 18px;
-  }
+        .radio:checked{
+            background:#7f5af0;
+            box-shadow:0 0 10px rgba(127,90,240,0.7);
+        }
 
-  .hel {
-    text-align: center;
-    font-size: 20px;
-  }
-}
+        .radio:checked::before{
+            content:'';
+            width:8px;
+            height:8px;
+            border-radius:50%;
+            background:white;
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%);
+        }
 
-@media (max-width: 768px) {
-  .nav-bar {
-    flex-direction: column;
-    align-items: center;
-    
-  }
+        .lab{
+            font-size:15px;
+            cursor:pointer;
+        }
 
-  h1 {
-    font-size: 20px;
-    text-align: center;
-  }
+        /* BUTTON */
 
-  .final {
-    margin-top: 2rem;
-    padding: 0 1rem;
-    text-align: center;
-  }
+        .btn-wrapper{
+            display:flex;
+            justify-content:center;
+            margin-top:1.3rem;
+        }
 
-  .text {
-    width: 100%;
-    height: 160px;
-    font-size: 16px;
-  }
+        #but1{
+            border:none;
+            padding:0.85rem 2.5rem;
+            border-radius:50px;
+            background:linear-gradient(135deg,#7f5af0,#2cb67d);
+            color:white;
+            font-size:16px;
+            font-weight:600;
+            cursor:pointer;
+            transition:0.3s;
+        }
 
-  .inp {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
+        #but1:hover{
+            transform:translateY(-2px);
+            box-shadow:0 10px 25px rgba(127,90,240,0.4);
+        }
 
-  .inp-lab {
-    flex-wrap: wrap;
-    gap: 0.3rem;
-  }
+        /* TOAST */
 
-  .radio {
-    width: 18px;
-    height: 18px;
-  }
+        .toast-container{
+            position:fixed;
+            top:15px;
+            right:15px;
+            z-index:1000;
+        }
 
-  #but1 {
-    width: 90%;
-    padding: 0.8rem;
-    font-size: 18px;
-  }
+        .custom-toast{
+            position:relative;
+            min-width:250px;
+            padding:12px 40px 12px 15px;
+            border-radius:14px;
+            margin-top:10px;
+            color:white;
+            animation:slideIn 0.4s ease;
+            box-shadow:0 8px 20px rgba(0,0,0,0.3);
+        }
 
-  .toast-container {
-    right: 10px;
-    bottom: 10px;
-    max-width: 70vw;
-  }
+        @keyframes slideIn{
+            from{
+                opacity:0;
+                transform:translateX(100%);
+            }
+            to{
+                opacity:1;
+                transform:translateX(0);
+            }
+        }
 
-  .custom-toast {
-    max-width: 70vw;
-    width: 100%;
-    padding: 10px 35px 10px 12px;
-  }
+        .toast-body{
+            font-size:14px;
+        }
 
-  .close-btn {
-    font-size: 28px;
-    right: 6px;
-    top: 2px;
-  }
-}
+        .close-btn{
+            position:absolute;
+            right:10px;
+            top:3px;
+            border:none;
+            background:none;
+            color:white;
+            font-size:24px;
+            cursor:pointer;
+        }
 
-@media (max-width: 480px) {
-  .hel {
-    font-size: 20px;
-  }
+        .success{
+            background:linear-gradient(135deg,#11998e,#38ef7d);
+        }
 
-  h1 {
-    font-size: 22px;
-  }
+        .warning{
+            background:linear-gradient(135deg,#ff512f,#dd2476);
+        }
 
-  .text {
-    font-size: 15px;
-    height: 140px;
-  }
+        .error{
+            background:linear-gradient(135deg,#ff416c,#ff4b2b);
+        }
 
-  #but1 {
-    font-size: 16px;
-    padding: 0.7rem;
-  }
+        .info{
+            background:linear-gradient(135deg,#396afc,#2948ff);
+        }
 
-  .toast-body {
-    font-size: 16px;
-  }
+        /* MOBILE */
 
-  #mai
-  {
-    margin-top: 0.7rem;
-  }
-}
+        @media(max-width:768px){
+
+            body{
+                overflow:auto;
+            }
+
+            .container{
+                height:auto;
+                padding:1rem;
+            }
+
+            .card{
+                padding:1.2rem;
+            }
+
+            .hero h2{
+                font-size:1.5rem;
+            }
+
+            .hero p{
+                font-size:0.85rem;
+            }
+
+            .text{
+                height:150px;
+            }
+
+            .options{
+                grid-template-columns:1fr;
+            }
+
+            #but1{
+                width:100%;
+            }
+
+            .nav-bar{
+                padding:0 1rem;
+            }
+
+            .logo h1{
+                font-size:1.2rem;
+            }
+        }
+
     </style>
 </head>
 
-<body class="for-item">
-    <form action="/tech" method="post"> {% csrf_token %}  
+<body>
+
+    <form action="/tech" method="post">
+        {% csrf_token %}
+
+        <!-- NAVBAR -->
 
         <nav class="nav-bar">
-            <div class="box-left">
+
+            <div class="logo">
+                <div class="logo-icon">T</div>
                 <h1>TextUtils.in</h1>
             </div>
 
         </nav>
 
-        <div class="final">
-            <h3 class="hel">Analyze Your Text and Make It More Understandable</h3>
-            <textarea class="text" name="text" style="margin: 0px; width: 936px; height: 207px;"></textarea>
-        </div>
+        <!-- MAIN -->
 
-        <div class="butaddinp">
-            <div class="inp">
+        <div class="container">
 
-                <div>
-                  <div class="inp-lab"><input type="radio" name="val" class="radio">
-                  <label for="val" class="lab">Remove Punctuations</label></div>
+            <div class="card">
 
-                  <br/>
-               
-                  <div class="inp-lab"><input type="radio" name="val1" class="radio">
-                  <label for="val1" class="lab">Captalize Text</label></div>
+                <div class="hero">
+                    <h2>Transform Your Text ✨</h2>
+
+                    <p>
+                        Clean, format, and beautify your text instantly.
+                    </p>
                 </div>
-            
-                <div id="mai">
-                  <div class="inp-lab"><input type="radio" name="spr" class="radio">
-                  <label for="spr" class="lab">Space Remover</label></div>
 
-                  <br/>
-               
-                  <div class="inp-lab"><input type="radio" name="nlr" class="radio">
-                  <label for="nlr" class="lab">Newline Remover</label></div>
+                <!-- TEXTAREA -->
+
+                <textarea
+                    class="text"
+                    name="text"
+                    placeholder="Type or paste your text here..."
+                ></textarea>
+
+                <!-- OPTIONS -->
+
+                <div class="options">
+
+                    <div class="option-card">
+                        <div class="inp-lab">
+                            <input type="radio" name="val" class="radio">
+                            <label class="lab">Remove Punctuations</label>
+                        </div>
+                    </div>
+
+                    <div class="option-card">
+                        <div class="inp-lab">
+                            <input type="radio" name="val1" class="radio">
+                            <label class="lab">Capitalize Text</label>
+                        </div>
+                    </div>
+
+                    <div class="option-card">
+                        <div class="inp-lab">
+                            <input type="radio" name="spr" class="radio">
+                            <label class="lab">Remove Spaces</label>
+                        </div>
+                    </div>
+
+                    <div class="option-card">
+                        <div class="inp-lab">
+                            <input type="radio" name="nlr" class="radio">
+                            <label class="lab">Remove New Lines</label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- BUTTON -->
+
+                <div class="btn-wrapper">
+                    <button type="submit" id="but1">
+                        Analyze Text
+                    </button>
                 </div>
 
             </div>
+
         </div>
 
-        <div class="but">
-            <button type="submit" id="but1">Analyze</button>
-        </div>
+        <!-- TOASTS -->
 
-   {% if messages %}
-      {% for message in messages %}
-        <div class="custom-toast {{ message.tags }}">
-          <div class="toast-body">
-            {{ message }}
-          </div>
-          <button class="close-btn" onclick="this.parentElement.remove();">&times;</button>
+        <div class="toast-container">
+
+            {% if messages %}
+                {% for message in messages %}
+
+                    <div class="custom-toast {{ message.tags }}">
+
+                        <div class="toast-body">
+                            {{ message }}
+                        </div>
+
+                        <button
+                            class="close-btn"
+                            onclick="this.parentElement.remove();"
+                            type="button"
+                        >
+                            &times;
+                        </button>
+
+                    </div>
+
+                {% endfor %}
+            {% endif %}
+
         </div>
-      {% endfor %}
-    {% endif %}
 
     </form>
-</body>
 
+</body>
 </html>

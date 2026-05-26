@@ -1,88 +1,70 @@
-from django.http import HttpResponse
-
-from django.shortcuts import redirect, render
-
+from django.shortcuts import render, redirect
 from django.contrib import messages
 
+
 def index(request):
-    return render(request,'index.html')
+    return render(request, 'index.html')
 
 
 def text_check(request):
 
-    djtext=(request.POST.get('text','default'))
-    on_off1=(request.POST.get('val','off'))
-    on_off2=(request.POST.get('val1','off'))
-    on_off3=(request.POST.get('spr','off'))
-    on_off4=(request.POST.get('nlr','off'))
+    djtext = request.POST.get('text', '').strip()
 
-    if(djtext==""):
-        messages.info(request, "Please Enter Some Text!!")
+    remove_punc = request.POST.get('val')
+    capitalize = request.POST.get('val1')
+    remove_spaces = request.POST.get('spr')
+    remove_newlines = request.POST.get('nlr')
+
+    # Empty input check
+    if not djtext:
+        messages.info(request, "Please Enter Some Text!")
         return redirect('/')
 
+    analyzed_text = djtext
+    operations = []
 
-    if(on_off1=="on"):
+    # Remove punctuations
+    if remove_punc == "on":
 
-        analyze=""
+        punc_list = '''`~!@#$%^&*()_-+=[]{}|\\:;"'<>,.?/'''
 
-        punc_list='''`~!@#$%^&?/\|=:;'''
+        analyzed_text = "".join(
+            char for char in analyzed_text
+            if char not in punc_list
+        )
 
-        for char in djtext:
+        operations.append("Removed Punctuations")
 
-            if char not in punc_list:
-                analyze=analyze+char
+    # Capitalize text
+    if capitalize == "on":
 
-        params={'purpose':'Removed Punctuations','analyzed_text':analyze}
+        analyzed_text = analyzed_text.upper()
 
-        djtext=analyze
+        operations.append("Capitalized Text")
 
-    if(on_off2=="on"):
+    # Remove extra spaces
+    if remove_spaces == "on":
 
-        analyze=""
+        analyzed_text = " ".join(analyzed_text.split())
 
-        for char in djtext:
+        operations.append("Removed Extra Spaces")
 
-            analyze=analyze+char.upper()
+    # Remove new lines
+    if remove_newlines == "on":
 
-        params={'purpose':'Captalize Text','analyzed_text':analyze}
+        analyzed_text = analyzed_text.replace("\n", "").replace("\r", "")
 
-        djtext=analyze
+        operations.append("Removed New Lines")
 
-    if(on_off3=="on"):
+    # No option selected
+    if not operations:
 
-        analyze=""
-
-        for index,char in enumerate(djtext):
-
-            if djtext[index]==" " and djtext[index+1]==" ":
-
-               pass
-
-            else:
-                analyze=analyze+char
-
-        params={'purpose':'Space Removing','analyzed_text':analyze}
-
-        djtext=analyze
-
-    if(on_off4=="on"):
-
-        analyze=""
-
-        for char in djtext:
-
-            if char!="\n" and char!="\r":
-
-                analyze=analyze+char
-
-        params={'purpose':'Newline Removing','analyzed_text':analyze}
-
-        djtext=analyze
-
-    if(on_off1!="on" and on_off2!="on" and on_off3!="on" and on_off4!="on"):
-
-        messages.warning(request, "Please Select a Radio Button!!")
+        messages.warning(request, "Please Select an Option!")
         return redirect('/')
 
-    
-    return render(request,'analyze.html',params)
+    params = {
+        'purpose': ", ".join(operations),
+        'analyzed_text': analyzed_text
+    }
+
+    return render(request, 'analyze.html', params)
