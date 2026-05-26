@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>TextUtils.in</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            background:
+            radial-gradient(circle at top left,#7f5af0 0%,transparent 30%),
+            radial-gradient(circle at bottom right,#2cb67d 0%,transparent 30%),
+            linear-gradient(135deg,#16161a,#242629);
+            color:white;
+            overflow:hidden;
+        }
+
+        /* NAVBAR */
+
+        .nav-bar{
+            width:100%;
+            height:70px;
+            padding:0 2rem;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            backdrop-filter:blur(15px);
+            background:rgba(255,255,255,0.05);
+            border-bottom:1px solid rgba(255,255,255,0.08);
+        }
+
+        .logo{
+            display:flex;
+            align-items:center;
+            gap:0.7rem;
+        }
+
+        .logo-icon{
+            width:40px;
+            height:40px;
+            border-radius:12px;
+            background:linear-gradient(135deg,#7f5af0,#2cb67d);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:18px;
+            font-weight:bold;
+        }
+
+        .logo h1{
+            font-size:1.4rem;
+            font-weight:600;
+        }
+
+        /* MAIN */
+
+        .container{
+            height:calc(100vh - 70px);
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:1rem;
+        }
+
+        .card{
+            width:100%;
+            max-width:950px;
+            background:rgba(255,255,255,0.08);
+            border:1px solid rgba(255,255,255,0.1);
+            backdrop-filter:blur(20px);
+            border-radius:24px;
+            padding:1.5rem 2rem;
+            box-shadow:0 10px 40px rgba(0,0,0,0.35);
+        }
+
+        /* HERO */
+
+        .hero{
+            text-align:center;
+            margin-bottom:1.2rem;
+        }
+
+        .hero h2{
+            font-size:2rem;
+            margin-bottom:0.5rem;
+            background:linear-gradient(90deg,#ffffff,#7f5af0,#2cb67d);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+        }
+
+        .hero p{
+            color:#b8b8c0;
+            font-size:0.95rem;
+            line-height:1.6;
+        }
+
+        /* TEXTAREA */
+
+        .text{
+            width:100%;
+            height:180px;
+            border:none;
+            outline:none;
+            border-radius:18px;
+            padding:1rem;
+            font-size:15px;
+            resize:none;
+            background:rgba(255,255,255,0.07);
+            color:white;
+            border:1px solid rgba(255,255,255,0.08);
+            transition:0.3s;
+        }
+
+        .text::placeholder{
+            color:#aaa;
+        }
+
+        .text:focus{
+            border-color:#7f5af0;
+            box-shadow:0 0 18px rgba(127,90,240,0.3);
+        }
+
+        /* OPTIONS */
+
+        .options{
+            margin-top:1rem;
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:0.8rem;
+        }
+
+        .option-card{
+            background:rgba(255,255,255,0.05);
+            padding:0.8rem 1rem;
+            border-radius:14px;
+            transition:0.3s;
+            border:1px solid rgba(255,255,255,0.06);
+        }
+
+        .option-card:hover{
+            background:rgba(255,255,255,0.09);
+        }
+
+        .inp-lab{
+            display:flex;
+            align-items:center;
+            gap:0.8rem;
+        }
+
+        /* RADIO */
+
+        .radio{
+            appearance:none;
+            width:20px;
+            height:20px;
+            border-radius:50%;
+            border:2px solid #7f5af0;
+            cursor:pointer;
+            position:relative;
+        }
+
+        .radio:checked{
+            background:#7f5af0;
+            box-shadow:0 0 10px rgba(127,90,240,0.7);
+        }
+
+        .radio:checked::before{
+            content:'';
+            width:8px;
+            height:8px;
+            border-radius:50%;
+            background:white;
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%);
+        }
+
+        .lab{
+            font-size:15px;
+            cursor:pointer;
+        }
+
+        /* BUTTON */
+
+        .btn-wrapper{
+            display:flex;
+            justify-content:center;
+            margin-top:1.3rem;
+        }
+
+        #but1{
+            border:none;
+            padding:0.85rem 2.5rem;
+            border-radius:50px;
+            background:linear-gradient(135deg,#7f5af0,#2cb67d);
+            color:white;
+            font-size:16px;
+            font-weight:600;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        #but1:hover{
+            transform:translateY(-2px);
+            box-shadow:0 10px 25px rgba(127,90,240,0.4);
+        }
+
+        /* TOAST */
+
+        .toast-container{
+            position:fixed;
+            top:15px;
+            right:15px;
+            z-index:1000;
+        }
+
+        .custom-toast{
+            position:relative;
+            min-width:250px;
+            padding:12px 40px 12px 15px;
+            border-radius:14px;
+            margin-top:10px;
+            color:white;
+            animation:slideIn 0.4s ease;
+            box-shadow:0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        @keyframes slideIn{
+            from{
+                opacity:0;
+                transform:translateX(100%);
+            }
+            to{
+                opacity:1;
+                transform:translateX(0);
+            }
+        }
+
+        .toast-body{
+            font-size:14px;
+        }
+
+        .close-btn{
+            position:absolute;
+            right:10px;
+            top:3px;
+            border:none;
+            background:none;
+            color:white;
+            font-size:24px;
+            cursor:pointer;
+        }
+
+        .success{
+            background:linear-gradient(135deg,#11998e,#38ef7d);
+        }
+
+        .warning{
+            background:linear-gradient(135deg,#ff512f,#dd2476);
+        }
+
+        .error{
+            background:linear-gradient(135deg,#ff416c,#ff4b2b);
+        }
+
+        .info{
+            background:linear-gradient(135deg,#396afc,#2948ff);
+        }
+
+        /* MOBILE */
+
+        @media(max-width:768px){
+
+            body{
+                overflow:auto;
+            }
+
+            .container{
+                height:auto;
+                padding:1rem;
+            }
+
+            .card{
+                padding:1.2rem;
+            }
+
+            .hero h2{
+                font-size:1.5rem;
+            }
+
+            .hero p{
+                font-size:0.85rem;
+            }
+
+            .text{
+                height:150px;
+            }
+
+            .options{
+                grid-template-columns:1fr;
+            }
+
+            #but1{
+                width:100%;
+            }
+
+            .nav-bar{
+                padding:0 1rem;
+            }
+
+            .logo h1{
+                font-size:1.2rem;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <form action="/tech" method="post">
+        {% csrf_token %}
+
+        <!-- NAVBAR -->
+
+        <nav class="nav-bar">
+
+            <div class="logo">
+                <div class="logo-icon">T</div>
+                <h1>TextUtils.in</h1>
+            </div>
+
+        </nav>
+
+        <!-- MAIN -->
+
+        <div class="container">
+
+            <div class="card">
+
+                <div class="hero">
+                    <h2>Transform Your Text ✨</h2>
+
+                    <p>
+                        Clean, format, and beautify your text instantly.
+                    </p>
+                </div>
+
+                <!-- TEXTAREA -->
+
+                <textarea
+                    class="text"
+                    name="text"
+                    placeholder="Type or paste your text here..."
+                ></textarea>
+
+                <!-- OPTIONS -->
+
+                <div class="options">
+
+                    <div class="option-card">
+                        <div class="inp-lab">
+                            <input type="radio" name="val" class="radio">
+                            <label class="lab">Remove Punctuations</label>
+                        </div>
+                    </div>
+
+                    <div class="option-card">
+                        <div class="inp-lab">
+                            <input type="radio" name="val1" class="radio">
+                            <label class="lab">Capitalize Text</label>
+                        </div>
+                    </div>
+
+                    <div class="option-card">
+                        <div class="inp-lab">
+                            <input type="radio" name="spr" class="radio">
+                            <label class="lab">Remove Spaces</label>
+                        </div>
+                    </div>
+
+                    <div class="option-card">
+                        <div class="inp-lab">
+                            <input type="radio" name="nlr" class="radio">
+                            <label class="lab">Remove New Lines</label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- BUTTON -->
+
+                <div class="btn-wrapper">
+                    <button type="submit" id="but1">
+                        Analyze Text
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- TOASTS -->
+
+        <div class="toast-container">
+
+            {% if messages %}
+                {% for message in messages %}
+
+                    <div class="custom-toast {{ message.tags }}">
+
+                        <div class="toast-body">
+                            {{ message }}
+                        </div>
+
+                        <button
+                            class="close-btn"
+                            onclick="this.parentElement.remove();"
+                            type="button"
+                        >
+                            &times;
+                        </button>
+
+                    </div>
+
+                {% endfor %}
+            {% endif %}
+
+        </div>
+
+    </form>
+
+</body>
+</html>
